@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,14 +27,19 @@ public class memoryGame implements ActionListener {
 	JButton card3;
 	JButton card4;
 	JButton card5;
-	JLabel image1 = createLabelImage("2Diamonds.png");
-	JLabel image2 = createLabelImage("3ofClubs.jpg");
-	JLabel image3 = createLabelImage("9Diamonds.jpg");
-	JLabel image4 = createLabelImage("10Hearts.jpg");
-	JLabel image5 = createLabelImage("8Spades.jpg");
-	ArrayList<JLabel> list = new ArrayList<>();
-	List<String> list2 = Arrays.asList("");
-
+	Icon image1 = createIconImage("2Diamonds.png");
+	Icon image11 = createIconImage("2Diamonds.png");
+	Icon image2 = createIconImage("3ofClubs.jpg");
+	Icon image22 = createIconImage("3ofClubs.jpg");
+	Icon image3 = createIconImage("9Diamonds.jpg");
+	Icon image33 = createIconImage("9Diamonds.jpg");
+	Icon image4 = createIconImage("10Hearts.jpg");
+	Icon image44 = createIconImage("10Hearts.jpg");
+	//JLabel image5 = createLabelImage("8Spades.jpg");
+	Random rand = new Random();
+	ArrayList<Icon> list = new ArrayList<>();
+	ArrayList<Icon> list2 = new ArrayList<Icon>();
+    ArrayList<memoryGameCard> list3 = new ArrayList<memoryGameCard>();
 	
 	public void setup() {
 		
@@ -45,31 +52,37 @@ public class memoryGame implements ActionListener {
 		mainPanel = new JPanel();
 		secondPanel = new JPanel();
 		imagePanel = new JPanel();
-		card1 = new JButton();
-		card2 = new JButton();
-		card3 = new JButton();
-		card4 = new JButton();
-		card5 = new JButton();
 		
 		GridLayout layout = new GridLayout(2,4);
 		secondPanel.setLayout(layout);
 		
-		image2.setSize(new Dimension(10,10));
+		//image2.setSize(new Dimension(10,10));
 		
 		frame.add(mainPanel);
 		mainPanel.add(secondPanel);
-		secondPanel.add(card1);
-		secondPanel.add(card2);
-		secondPanel.add(card3);
-		secondPanel.add(card4);
-		secondPanel.add(card5);
-		card1.add(image1);
-		card2.add(image2);
-		card3.add(image3);
-		card4.add(image4);
-		card5.add(image5);
 		
-		card1.addActionListener(this);
+		list2.add(image1);
+		list2.add(image2);
+		list2.add(image3);
+		list2.add(image4);
+		list2.add(image11);
+		list2.add(image22);
+		list2.add(image33);
+		list2.add(image44);
+		
+		Collections.shuffle(list2);
+		
+		for (Icon image: list2) {
+		memoryGameCard card = new memoryGameCard(image);
+		secondPanel.add(card);
+		//card.setLabel("placeholder");
+		card.addActionListener(this);
+
+		list3.add(card);
+		
+		}
+		
+		
 		
 	
 		
@@ -77,27 +90,25 @@ public class memoryGame implements ActionListener {
 		frame.pack();
 	}
 	
-	private JLabel createLabelImage(String fileName) {
+	private ImageIcon createIconImage(String fileName) {
 		URL imageURL = getClass().getResource(fileName);
 		if (imageURL == null) {
 			System.err.println("Could not find image " + fileName);
-			return new JLabel();
+			return new ImageIcon();
 		}
 		ImageIcon icon = new ImageIcon(imageURL);
-		JLabel imageLabel = new JLabel(icon);
 	
-		return imageLabel;
+		return icon;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		Random ran = new Random();
-		JButton buttonPressed = (JButton) e.getSource();
+		memoryGameCard buttonPressed = (memoryGameCard) e.getSource();
 		
-		if (buttonPressed.equals(card1)) {
-			
-		}
+		buttonPressed.setIcon(buttonPressed.icon);
+		
 	}
 	
 	
