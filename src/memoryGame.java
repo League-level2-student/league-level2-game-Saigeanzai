@@ -40,12 +40,14 @@ public class memoryGame implements ActionListener {
 	ArrayList<Icon> list = new ArrayList<>();
 	ArrayList<Icon> list2 = new ArrayList<Icon>();
     ArrayList<memoryGameCard> list3 = new ArrayList<memoryGameCard>();
+    boolean imageOn = false;
+	private memoryGameCard firstCard;
+	private memoryGameCard secondCard;
 	
 	public void setup() {
 		
 		
 		
-		frame = new JFrame();
 		frame = new JFrame();
 		frame.setVisible(true);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -62,13 +64,13 @@ public class memoryGame implements ActionListener {
 		mainPanel.add(secondPanel);
 		
 		list2.add(image1);
+		list2.add(image1);
+		list2.add(image2);
 		list2.add(image2);
 		list2.add(image3);
+		list2.add(image3);
 		list2.add(image4);
-		list2.add(image11);
-		list2.add(image22);
-		list2.add(image33);
-		list2.add(image44);
+		list2.add(image4);
 		
 		Collections.shuffle(list2);
 		
@@ -77,14 +79,13 @@ public class memoryGame implements ActionListener {
 		secondPanel.add(card);
 		//card.setLabel("placeholder");
 		card.addActionListener(this);
-
 		list3.add(card);
 		
 		}
 		
 		
 		
-	
+		frame.setSize(1000,800);
 		
 		
 		frame.pack();
@@ -107,7 +108,46 @@ public class memoryGame implements ActionListener {
 		Random ran = new Random();
 		memoryGameCard buttonPressed = (memoryGameCard) e.getSource();
 		
+		if (firstCard==(null) && secondCard==(null)) {
 		buttonPressed.setIcon(buttonPressed.icon);
+		this.firstCard = buttonPressed;
+		}
+		
+		else if (secondCard==null) {
+			buttonPressed.setIcon(buttonPressed.icon);
+			this.secondCard = buttonPressed;
+		}
+		//else if (this.firstCard==image1 && this.secondCard==image1) {
+			//System.out.println("testing");
+		}
+		
+/*		
+		
+	if (imageOn==false) {
+			buttonPressed.setIcon(buttonPressed.icon);
+			imageOn=true;
+		}
+		else if (imageOn==true) {
+			buttonPressed.setIcon(null);
+			imageOn=false;
+		}
+		
+		if (this.oldIcon.equals(null)) {
+			this.oldIcon = buttonPressed;
+		}
+		
+		else if (buttonPressed.equals(this.oldIcon)) {
+	
+			System.out.println("testing");
+		}
+else {
+		buttonPressed.setIcon(null);
+		this.oldIcon.setIcon(null);
+		this.oldIcon = null;
+		}
+		
+		
+		*/
 		
 	}
 	
@@ -116,4 +156,4 @@ public class memoryGame implements ActionListener {
 	
 	
 	
-}
+
