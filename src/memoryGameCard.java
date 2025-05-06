@@ -5,10 +5,13 @@ import javax.swing.JLabel;
 public class memoryGameCard extends JButton {
 
 	private static final long serialVersionUID = 1L;
-Icon icon;
-	public memoryGameCard(Icon icon) {
+Icon Front;
+Icon Back;
+	public memoryGameCard(Icon icon, Icon Back) {
 		super();
-		this.icon = icon;
+		this.Front = icon;
+		this.Back = Back;
+		this.setIcon(Back);
 	}
 	
 	
