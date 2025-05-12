@@ -14,6 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class memoryGame implements ActionListener {
@@ -57,6 +58,8 @@ public class memoryGame implements ActionListener {
 		frame.add(mainPanel);
 		mainPanel.add(secondPanel);
 
+		JOptionPane.showMessageDialog(null, "Flip all the cards to win");
+		
 		list2.add(image1);
 		list2.add(image1);
 		list2.add(image2);
@@ -110,6 +113,9 @@ public class memoryGame implements ActionListener {
 
 			if (firstCard.getIcon() == secondCard.getIcon()) {
 				System.out.println("match!");
+				if (allCardsFaceUp()) {
+					System.out.println("You win!");
+				}
 				firstCard = null;
 				secondCard = null;
 			}
@@ -121,11 +127,7 @@ public class memoryGame implements ActionListener {
 			secondCard.setIcon(cardBack);
 			firstCard = null;
 			secondCard = null;
-			for (memoryGameCard image : list3) {
-				if (image.getIcon()==cardBack) {
-					
-				}
-			}
+			
 		}
 		/*
 		 * 
@@ -143,5 +145,14 @@ public class memoryGame implements ActionListener {
 		 * 
 		 */
 
+	}
+
+	private boolean allCardsFaceUp() {
+		for (memoryGameCard image : list3) {
+			if (image.getIcon()==cardBack) {
+			return false;
+			}
+		}
+		return true;
 	}
 }
